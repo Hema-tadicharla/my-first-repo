@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QuickBite — Food Delivery</title>
+  <meta name="description" content="QuickBite — fast, fresh food delivery" />
+  <style>
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: #FFF8F3; color:#222}
+
+    /* Container */
+    .container{max-width:1100px;margin:28px auto;padding:24px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#FF7A59,#FFB86B);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(255,122,89,0.18)}
+    .brand h1{font-size:20px}
+    nav{display:flex;gap:12px;align-items:center}
+    .nav-link{padding:10px 14px;border-radius:10px;text-decoration:none;color:#6B6B6B;font-weight:600}
+    .nav-link.cta{background:#FF7A59;color:white}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;margin-top:28px;align-items:center}
+    .hero-left h2{font-size:32px;margin-bottom:12px}
+    .hero-left p{color:#555;margin-bottom:18px}
+    .search{display:flex;gap:8px}
+    .search input{flex:1;padding:12px;border-radius:12px;border:1px solid #EFE6E1;background:white}
+    .search button{padding:12px 18px;border-radius:12px;border:0;background:#FF7A59;color:white;font-weight:700}
+    .hero-right{background:linear-gradient(180deg,#FFF7F3,white);padding:18px;border-radius:16px;box-shadow:0 8px 24px rgba(255,122,89,0.06)}
+    .promo{display:flex;gap:12px;align-items:center}
+    .promo img{width:120px;height:120px;object-fit:cover;border-radius:12px}
+
+    /* Categories */
+    .categories{display:flex;gap:12px;overflow:auto;margin-top:20px;padding-bottom:6px}
+    .cat{flex:0 0 auto;padding:10px 14px;border-radius:16px;background:white;border:1px solid #F0E6E2;min-width:110px;text-align:center;font-weight:700}
+
+    /* Menu grid */
+    .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+    .card{background:white;border-radius:14px;padding:12px;border:1px solid #F0E6E2;box-shadow:0 6px 18px rgba(0,0,0,0.03);display:flex;gap:12px}
+    .card img{width:112px;height:88px;object-fit:cover;border-radius:10px}
+    .card-info{flex:1}
+    .card-info h3{margin-bottom:8px;font-size:16px}
+    .card-info p{font-size:13px;color:#666;margin-bottom:8px}
+    .card-footer{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .price{font-weight:800}
+    .btn{padding:8px 12px;border-radius:10px;border:0;background:#FF7A59;color:white;font-weight:700}
+
+    /* Featured row */
+    .featured{margin-top:28px;padding:18px;background:linear-gradient(90deg,#FFF3EB,#FFF8F3);border-radius:14px;display:flex;align-items:center;gap:18px}
+    .featured img{width:90px;height:90px;object-fit:cover;border-radius:12px}
+
+    /* Footer */
+    footer{margin-top:36px;padding-top:18px;border-top:1px dashed #F0E6E2;display:flex;justify-content:space-between;align-items:center}
+    .small{color:#666;font-size:13px}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .menu{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 560px){
+      .menu{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+      .search input{padding:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">QB</div>
+        <div>
+          <h1>QuickBite</h1>
+          <div style="font-size:12px;color:#8E8E8E">Fresh food — delivered fast</div>
+        </div>
+      </div>
+      <nav>
+        <a class="nav-link" href="#menu">Menu</a>
+        <a class="nav-link" href="#offers">Offers</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-link cta" href="#order">Order Now</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="hero">
+      <div class="hero-left">
+        <h2>Delicious meals delivered to your door — in minutes.</h2>
+        <p>Local restaurants, curated menus, easy tracking. Order now and get hot food delivered fast.</p>
+
+        <div class="search" role="search" aria-label="Find food">
+          <input type="search" placeholder="Enter your delivery address or dish (e.g. 'Paneer Butter Masala')" />
+          <button aria-label="Search">Search</button>
+        </div>
+
+        <div class="categories" aria-label="categories" style="margin-top:16px">
+          <div class="cat">Pizza</div>
+          <div class="cat">Biryani</div>
+          <div class="cat">Burgers</div>
+          <div class="cat">Desserts</div>
+          <div class="cat">Healthy</div>
+        </div>
+
+        <div id="menu"></div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="promo">
+          <img src="https://images.unsplash.com/photo-1604908811355-07d09a79a1b4?auto=format&fit=crop&w=800&q=60" alt="Delicious meal"/>
+          <div>
+            <strong>Get 30% off</strong>
+            <div style="color:#6B6B6B;font-size:13px;margin-top:6px">Use code <strong>FIRSTBITE</strong> — valid for new customers</div>
+            <div style="margin-top:12px">
+              <button class="btn">Redeem Offer</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;font-size:13px;color:#666">
+          <strong>Fastest delivery:</strong> 25–40 mins • <strong>Contactless</strong> delivery available
+        </div>
+      </aside>
+    </section>
+
+    <section class="menu" aria-label="menu items">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1604908177522-3d0b4a3fa5a7?auto=format&fit=crop&w=800&q=60" alt="Chicken Biryani"/>
+        <div class="card-info">
+          <h3>Chicken Biryani</h3>
+          <p>Fragrant long-grain rice layered with spiced chicken, fried onions and house masala.</p>
+          <div class="card-footer">
+            <div class="price">₹199</div>
+            <button class="btn">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1604909053451-1cc9a9b12d3b?auto=format&fit=crop&w=800&q=60" alt="Margherita Pizza"/>
+        <div class="card-info">
+          <h3>Margherita Pizza</h3>
+          <p>Stone-baked pizza with fresh basil, tomato sauce and buffalo mozzarella.</p>
+          <div class="card-footer">
+            <div class="price">₹299</div>
+            <button class="btn">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=60" alt="Veg Burger"/>
+        <div class="card-info">
+          <h3>Classic Veg Burger</h3>
+          <p>Homestyle patty, lettuce, tomato, pickles and a tangy sauce — served with fries.</p>
+          <div class="card-footer">
+            <div class="price">₹149</div>
+            <button class="btn">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60" alt="Paneer Butter Masala"/>
+        <div class="card-info">
+          <h3>Paneer Butter Masala</h3>
+          <p>Soft paneer cubes in a rich creamy tomato gravy, served with steamed rice or naan.</p>
+          <div class="card-footer">
+            <div class="price">₹179</div>
+            <button class="btn">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1604908811284-4f8d3b7b5b6f?auto=format&fit=crop&w=800&q=60" alt="Chocolate Dessert"/>
+        <div class="card-info">
+          <h3>Chocolate Lava Cake</h3>
+          <p>Warm chocolate cake with a gooey molten centre — perfect for a sweet finish.</p>
+          <div class="card-footer">
+            <div class="price">₹129</div>
+            <button class="btn">Add</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=60" alt="Fresh Salad"/>
+        <div class="card-info">
+          <h3>Quinoa Salad</h3>
+          <p>Quinoa, roasted veggies, feta and lemon vinaigrette — light and healthy.</p>
+          <div class="card-footer">
+            <div class="price">₹159</div>
+            <button class="btn">Add</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="featured" id="offers">
+      <img src="https://images.unsplash.com/photo-1543353071-087092ec393a?auto=format&fit=crop&w=800&q=60" alt="Family meal"/>
+      <div>
+        <h3>Family Combo: Save 25%</h3>
+        <p class="small">2 Large Pizzas + 1 Pasta + 2 Soft Drinks — perfect for movie night.</p>
+        <div style="margin-top:12px"><button class="btn">Order Combo</button></div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <div style="font-weight:700">QuickBite</div>
+        <div class="small">© <span id="year"></span> QuickBite Foods • Privacy • Terms</div>
+      </div>
+      <div class="small" id="contact">Contact: +91 90000 00000 • hello@quickbite.example</div>
+    </footer>
+  </div>
+
+  <script>
+    // small UI touches
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Add-to-cart visual feedback (no real cart)
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const orig = btn.textContent;
+        btn.textContent = 'Added ✓';
+        btn.disabled = true;
+        setTimeout(()=>{btn.textContent = orig; btn.disabled = false},1200);
+      })
+    })
+  </script>
+</body>
+</html>
